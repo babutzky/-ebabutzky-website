@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-bg:         #090909;
+  --color-bg-2:       #0c0c0c;
+  --color-bg-3:       #0f0f0f;
+  --color-surface:    rgba(255, 255, 255, 0.02);
+
+  --color-text:       #f0f0f0;
+  --color-text-muted: rgba(240, 240, 240, 0.80);
+  --color-text-faint: rgba(240, 240, 240, 0.36);
+
+  --color-accent:     #3D5166;
+  --color-accent-h:   #4D677E;
+
+  --color-border:     rgba(255, 255, 255, 0.08);
+  --color-border-h:   rgba(255, 255, 255, 0.16);
+
+  --font: 'Geist', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+
+  --max-width:     1440px;
+  --padding-x:     clamp(20px, 4.5vw, 48px);
+  --section-y:     clamp(72px, 10vw, 120px);
+  --header-offset: 110px;
+
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font);
+  font-size: 19px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+  overflow-x: hidden;
+}
+
+main { display: block; }
+
+img, video { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+button, input, textarea { font: inherit; }
+
+/* ── Layout utilities ── */
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--padding-x);
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.36);
+  margin-bottom: 20px;
+}
+
+section[id] {
+  scroll-margin-top: var(--header-offset);
+}
+
+/* ── Premium reveal animation ──
+   opacity + translateY + blur creates a "coming into focus"
+   effect: calm, precise, high-end – not flashy.               */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.visible {
+  animation: revealUp 0.60s var(--ease-out) both;
+}
+
+/* ── Text selection ── */
+::selection       { background: rgba(120, 170, 255, 0.28); color: #ffffff; }
+::-moz-selection  { background: rgba(120, 170, 255, 0.28); color: #ffffff; }
+
+/* ── Focus-visible – keyboard navigation only ──
+   Mouse-Klicks erhalten kein Outline.
+   Tastaturnutzer sehen einen dezenten, neutralen Ring.  */
+:focus:not(:focus-visible) { outline: none; }
+:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.36);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Stagger utilities */
+.reveal.d1 { animation-delay: 0.05s; }
+.reveal.d2 { animation-delay: 0.13s; }
+.reveal.d3 { animation-delay: 0.22s; }
+.reveal.d4 { animation-delay: 0.32s; }

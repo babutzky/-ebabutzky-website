@@ -1,0 +1,74 @@
+---
+---
+
+<section class="gridop" id="gridoperation">
+  <div class="section-inner gridop__inner">
+
+    <span class="section-label reveal">GridOperation</span>
+
+    <h2 class="gridop__headline reveal d1">
+      Energieinfrastruktur<br />als System denken.
+    </h2>
+
+    <div class="gridop__body">
+      <p class="reveal d2">
+        GridOperation ist unsere Konsequenz aus dem Betrieb.
+        Nicht einzelne Leistungen isoliert betrachten,
+        sondern Energieinfrastruktur in ihrem Zusammenhang verstehen.
+      </p>
+      <p class="reveal d3">
+        Neue Anlagen, Einbindungen und spätere Betriebsverantwortung
+        denken wir nicht getrennt, sondern aus dem System heraus.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .gridop {
+    padding: calc(var(--section-y) * 1.35) 0;
+    background: var(--color-bg-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gridop__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gridop__headline {
+    margin: 0 0 clamp(32px, 4vw, 52px);
+    max-width: 18ch;
+    font-size: clamp(2.4rem, 4.4vw, 4.6rem);
+    font-weight: 700;
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    color: var(--color-text);
+  }
+
+  .gridop__body {
+    max-width: 48ch;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .gridop__body p {
+    margin: 0;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.70;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  /* Subdued reveals – almost static, just "appearing" */
+  :global(.gridop .reveal.visible) {
+    animation: revealUp 0.80s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (max-width: 640px) {
+    .gridop__headline { max-width: 100%; }
+    .gridop__body     { max-width: 100%; }
+  }
+</style>

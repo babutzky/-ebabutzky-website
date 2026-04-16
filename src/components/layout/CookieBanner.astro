@@ -1,0 +1,157 @@
+<div class="cookie-banner" data-cookie-banner aria-live="polite">
+  <div class="cookie-banner__inner">
+    <p class="cookie-banner__text">
+      Diese Website verwendet keine externen Tracking-Dienste.
+      Weitere Informationen in der <a href="/datenschutz">Datenschutzerklärung</a>.
+    </p>
+    <div class="cookie-banner__actions">
+      <button class="cookie-banner__btn cookie-banner__btn--accept" data-cookie-accept>
+        Verstanden
+      </button>
+      <a href="/datenschutz" class="cookie-banner__link">Mehr erfahren</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.querySelector('[data-cookie-banner]') as HTMLElement | null;
+  const acceptBtn = document.querySelector('[data-cookie-accept]');
+
+  const CONSENT_KEY = 'eb_cookie_consent';
+
+  if (localStorage.getItem(CONSENT_KEY)) {
+    banner?.remove();
+  } else {
+    banner?.classList.add('is-visible');
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    localStorage.setItem(CONSENT_KEY, '1');
+    banner?.classList.remove('is-visible');
+    setTimeout(() => banner?.remove(), 400);
+  });
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: rgba(10, 10, 10, 0.96);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    opacity: 0;
+    transition: opacity 0.32s ease;
+    pointer-events: none;
+  }
+
+  .cookie-banner.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .cookie-banner__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 18px clamp(20px, 4.5vw, 48px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .cookie-banner__text {
+    margin: 0;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.54);
+    line-height: 1.55;
+    max-width: 56ch;
+  }
+
+  .cookie-banner__text a {
+    color: rgba(255, 255, 255, 0.68);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.20);
+    text-underline-offset: 3px;
+    transition: color 0.18s ease;
+  }
+
+  .cookie-banner__text a:hover {
+    color: rgba(255, 255, 255, 0.90);
+  }
+
+  .cookie-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .cookie-banner__btn--accept {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 22px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 2px;
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background   0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      color        0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .cookie-banner__btn--accept:hover {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+  }
+
+  .cookie-banner__link {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.36);
+    transition: color 0.18s ease;
+    white-space: nowrap;
+  }
+
+  .cookie-banner__link:hover {
+    color: rgba(255, 255, 255, 0.64);
+  }
+
+  @media (max-width: 640px) {
+    .cookie-banner {
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .cookie-banner__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px 20px;
+    }
+
+    .cookie-banner__actions {
+      width: 100%;
+    }
+
+    .cookie-banner__btn--accept {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .cookie-banner__link {
+      display: none;
+    }
+  }
+</style>

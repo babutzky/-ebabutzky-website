@@ -1,0 +1,426 @@
+---
+---
+
+<section class="contact" id="kontakt">
+  <div class="section-inner contact__inner">
+
+    <!-- LEFT -->
+    <div class="contact__intro reveal">
+      <span class="section-label">Kontakt</span>
+      <h2>Kontakt ohne<br />Umwege.</h2>
+      <p class="contact__lead">Direkter Kontakt für konkrete Anliegen.</p>
+
+      <div class="contact__direct">
+        <p class="contact__direct-label">Direkter Kontakt</p>
+
+        <a class="contact__direct-row" href="tel:+491623744444">
+          <strong>+49 162 374 44 44</strong>
+        </a>
+
+        <a class="contact__direct-row" href="mailto:anfrage@ebabutzky.com">
+          <strong>anfrage@ebabutzky.com</strong>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: form, no box -->
+    <div class="contact__form-wrap reveal">
+      <p class="contact__form-label" data-form-label>Ihr Anliegen</p>
+
+      <form class="contact__form" data-contact-form method="POST" action="/api/kontakt" novalidate>
+        <div class="contact__grid">
+          <div class="field">
+            <label for="c-name">Name <span class="field__optional">optional</span></label>
+            <input id="c-name" type="text" name="name"
+                   autocomplete="name" placeholder="Max Mustermann" />
+          </div>
+          <div class="field">
+            <label for="c-email">E-Mail</label>
+            <input id="c-email" type="email" name="email"
+                   autocomplete="email" placeholder="name@firma.de" required />
+            <span class="field__error" data-error="email" hidden>Bitte E-Mail-Adresse eingeben.</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="c-anliegen">Anliegen</label>
+          <textarea id="c-anliegen" name="anliegen" rows="6"
+            placeholder="Kurz beschreiben, worum es geht …"
+            required></textarea>
+          <span class="field__error" data-error="anliegen" hidden>Bitte Anliegen kurz beschreiben.</span>
+        </div>
+
+        <div class="contact__actions">
+          <button type="submit" class="contact__btn">Anfrage senden →</button>
+        </div>
+        <p class="contact__microcopy">Wir melden uns zeitnah.<br />Direkt und unkompliziert.</p>
+      </form>
+
+      <div class="contact__success" data-contact-success hidden>
+        <p class="contact__success-title">Nachricht erhalten.</p>
+        <p class="contact__success-sub">Wir melden uns zeitnah bei Ihnen.</p>
+      </div>
+
+      <p class="contact__error" data-contact-error hidden>
+        Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: var(--section-y) 0 calc(var(--section-y) + 40px);
+    background: var(--color-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  .contact__inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(40px, 7vw, 100px);
+    align-items: start;
+  }
+
+  /* ── Left ── */
+  .contact__intro h2 {
+    font-size: clamp(2.4rem, 4.4vw, 4.6rem);
+    font-weight: 700;
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    margin: 0 0 20px;
+    color: var(--color-text);
+  }
+
+  .contact__lead {
+    margin: 0 0 10px;
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    font-weight: 500;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .contact__lead-sub {
+    margin: 0 0 40px;
+    font-size: clamp(0.94rem, 1.2vw, 1.05rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.52);
+  }
+
+  .contact__direct {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contact__direct-label {
+    padding: 16px 0 12px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.56);
+  }
+
+  .contact__direct-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contact__direct-row:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contact__direct-row strong {
+    font-size: clamp(1rem, 1.3vw, 1.25rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.82);
+    transition: color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .contact__direct-row:hover strong {
+    color: #ffffff;
+  }
+
+  /* ── Right: form wrap ── */
+  .contact__form-wrap {
+    padding: 36px 40px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 12px 48px rgba(0, 0, 0, 0.36);
+  }
+
+  .contact__form-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.56);
+    margin-bottom: 28px;
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* Underline fields */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .field label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.68);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .field__optional {
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.10em;
+    color: rgba(255, 255, 255, 0.28);
+    text-transform: uppercase;
+  }
+
+  .field input,
+  .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.88);
+    font-family: var(--font);
+    font-size: 1rem;
+    padding: 10px 0;
+    outline: none;
+    resize: none;
+    width: 100%;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color 0.20s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .field textarea { min-height: 140px; }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-bottom-color: var(--color-accent-h);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.32);
+  }
+
+  .contact__actions {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .contact__note {
+    margin: 18px 0 0;
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.40);
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+
+  .contact__microcopy {
+    margin: 14px 0 0;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.36);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+
+  .field__error {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.50);
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    padding-top: 4px;
+  }
+
+  .contact__btn {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 28px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.90);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background   0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      color        0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      transform    0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .contact__btn:hover {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .contact__btn:active {
+    transform: translateY(0);
+    transition-duration: 0.08s;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 980px) {
+    .contact__inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .contact__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .contact__btn { width: 100%; justify-content: center; }
+
+    .contact__direct-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+  }
+
+  .contact__btn:disabled {
+    opacity: 0.50;
+    cursor: default;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .contact__error {
+    margin-top: 16px;
+    font-size: 0.80rem;
+    color: rgba(255, 255, 255, 0.52);
+    line-height: 1.5;
+  }
+
+  /* ── Success state ── */
+  .contact__success {
+    padding: 56px 0 48px;
+  }
+
+  .contact__success-title {
+    margin: 0 0 14px;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--color-text);
+  }
+
+  .contact__success-sub {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+</style>
+
+<script>
+  const form      = document.querySelector('[data-contact-form]') as HTMLFormElement | null;
+  const labelEl   = document.querySelector('[data-form-label]')   as HTMLElement | null;
+  const successEl = document.querySelector('[data-contact-success]') as HTMLElement | null;
+  const errorEl   = document.querySelector('[data-contact-error]')   as HTMLElement | null;
+  const submitBtn = form?.querySelector<HTMLButtonElement>('[type="submit"]') ?? null;
+
+  const showFieldError = (name: string, show: boolean) => {
+    const el = form?.querySelector<HTMLElement>(`[data-error="${name}"]`);
+    if (el) el.hidden = !show;
+  };
+
+  form?.querySelector('[name="email"]')?.addEventListener('input',    () => showFieldError('email',    false));
+  form?.querySelector('[name="anliegen"]')?.addEventListener('input', () => showFieldError('anliegen', false));
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const emailInput    = form.querySelector<HTMLInputElement>('[name="email"]');
+    const anliegenInput = form.querySelector<HTMLTextAreaElement>('[name="anliegen"]');
+    const nameInput     = form.querySelector<HTMLInputElement>('[name="name"]');
+
+    // Validierung
+    let valid = true;
+    if (!emailInput?.value.trim()) {
+      showFieldError('email', true);
+      emailInput?.focus();
+      valid = false;
+    } else {
+      showFieldError('email', false);
+    }
+    if (!anliegenInput?.value.trim()) {
+      showFieldError('anliegen', true);
+      if (valid) anliegenInput?.focus();
+      valid = false;
+    } else {
+      showFieldError('anliegen', false);
+    }
+    if (!valid) return;
+
+    // Senden
+    if (submitBtn) {
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Wird gesendet …';
+    }
+    if (errorEl) errorEl.hidden = true;
+
+    try {
+      const res = await fetch('/api/kontakt', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:     nameInput?.value.trim()    ?? '',
+          email:    emailInput?.value.trim()   ?? '',
+          anliegen: anliegenInput?.value.trim() ?? '',
+        }),
+      });
+
+      if (!res.ok) throw new Error('send_failed');
+
+      if (form)      form.hidden      = true;
+      if (labelEl)   labelEl.hidden   = true;
+      if (successEl) successEl.hidden = false;
+
+    } catch {
+      if (submitBtn) {
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Anfrage senden →';
+      }
+      if (errorEl) errorEl.hidden = false;
+    }
+  });
+</script>

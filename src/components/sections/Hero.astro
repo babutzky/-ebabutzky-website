@@ -1,0 +1,241 @@
+---
+---
+
+<section class="hero" data-hero>
+  <picture class="hero__bg">
+    <source srcset="/hero-bg-mobile.webp" media="(max-width: 768px)" />
+    <img
+      src="/hero-bg.webp"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+      data-hero-img
+    />
+  </picture>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <h1>
+      Energie.<br />
+      Die läuft.
+    </h1>
+
+    <p class="hero__sub">
+      Wir sichern den Betrieb von Energieanlagen.
+    </p>
+
+    <a href="#kontakt" class="cta">Anfrage senden →</a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.60) 32%,
+        rgba(0, 0, 0, 0.28) 62%,
+        rgba(0, 0, 0, 0.10) 100%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0) 50%,
+        rgba(0, 0, 0, 0.40) 100%
+      );
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 660px;
+    padding: 140px var(--padding-x) 100px;
+    color: #ffffff;
+  }
+
+  .hero__eyebrow {
+    display: block;
+    margin-bottom: 22px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  }
+
+  h1 {
+    margin: 0 0 28px;
+    font-size: clamp(3.8rem, 7.5vw, 6.8rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+  }
+
+  .hero__sub {
+    margin: 8px 0 44px;
+    max-width: 38ch;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(1.08rem, 1.5vw, 1.24rem);
+    line-height: 1.68;
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 28px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.90);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 2px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    transition:
+      background  0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      color       0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      transform   0.18s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.46s both;
+  }
+
+  .cta:hover {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .cta:active {
+    transform: translateY(0);
+    transition-duration: 0.08s;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .cta__note {
+    margin: 18px 0 0;
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.44);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.54s both;
+  }
+
+  @media (max-width: 900px) {
+    .content {
+      padding: 120px var(--padding-x) 80px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      align-items: flex-end;
+    }
+
+    .hero__bg img {
+      object-position: 45% 47%;
+    }
+
+    .overlay {
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.90) 0%,
+        rgba(0, 0, 0, 0.52) 50%,
+        rgba(0, 0, 0, 0.12) 100%
+      );
+    }
+
+    .content {
+      width: 100%;
+      max-width: 100%;
+      padding: 80px 20px 40px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 13vw, 4.5rem);
+    }
+
+    .hero__sub {
+      font-size: 1rem;
+      margin-bottom: 28px;
+    }
+
+    .hero__eyebrow {
+      display: none;
+    }
+
+    .cta {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+</style>
+
+<script>
+  const heroImg = document.querySelector('[data-hero-img]') as HTMLImageElement | null;
+  if (heroImg) {
+    let ticking = false;
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const offset = window.scrollY * 0.05;
+            heroImg.style.objectPosition = `center calc(40% + ${offset}px)`;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+</script>

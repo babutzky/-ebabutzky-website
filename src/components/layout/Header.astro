@@ -1,0 +1,362 @@
+<header class="header" data-header>
+  <div class="header__inner">
+    <a href="/" class="header__logo" aria-label="EBABUTZKY Startseite">
+      <img src="/ebabutzky-logo-claim-dark.png" alt="EBABUTZKY" />
+    </a>
+
+    <nav class="header__nav" aria-label="Hauptnavigation">
+      <a href="/#arbeitsweise" data-nav-link>Arbeitsweise</a>
+      <a href="/#perspektive" data-nav-link>Perspektive</a>
+      <a href="/#kontakt" data-nav-link>Kontakt</a>
+    </nav>
+
+    <button
+      class="header__toggle"
+      type="button"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" data-mobile-nav>
+    <nav class="mobile-nav__inner" aria-label="Mobile Navigation">
+      <a href="/#arbeitsweise" data-mobile-link>Arbeitsweise</a>
+      <a href="/#perspektive" data-mobile-link>Perspektive</a>
+      <a href="/#kontakt" data-mobile-link>Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header      = document.querySelector('[data-header]') as HTMLElement;
+  const navLinks    = Array.from(document.querySelectorAll('[data-nav-link]'));
+  const mobileLinks = Array.from(document.querySelectorAll('[data-mobile-link]'));
+  const menuToggle  = document.querySelector('[data-menu-toggle]') as HTMLButtonElement;
+  const sectionIds  = ['arbeitsweise', 'perspektive', 'kontakt'];
+  const sections    = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+
+  const setMenuState = (open: boolean) => {
+    header?.classList.toggle('menu-open', open);
+    menuToggle?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  const tick = () => {
+    // Three-state scroll logic
+    const y = window.scrollY;
+    header?.classList.toggle('is-scrolled', y > 20);
+    header?.classList.toggle('is-solid',    y > 160);
+
+    // Active nav – use viewport-relative position for precision
+    const headerH = (header?.offsetHeight ?? 96) + 48;
+    const nearBottom =
+      window.scrollY + window.innerHeight >=
+      document.documentElement.scrollHeight - 8;
+
+    let currentId = nearBottom ? sectionIds[sectionIds.length - 1] : '';
+
+    if (!nearBottom) {
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= headerH) currentId = s.id;
+      }
+    }
+
+    [...navLinks, ...mobileLinks].forEach(l =>
+      l.classList.toggle('is-active', l.getAttribute('href') === `/#${currentId}`)
+    );
+  };
+
+  menuToggle?.addEventListener('click', () =>
+    setMenuState(!header?.classList.contains('menu-open'))
+  );
+
+  document.querySelectorAll('[data-mobile-link]').forEach(l =>
+    l.addEventListener('click', () => setMenuState(false))
+  );
+
+  tick();
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize',  tick);
+
+  // Scroll to anchor on cross-page navigation (e.g. /impressum → /#kontakt)
+  // BaseLayout saves the hash in window.__initialHash before stripping it from the URL
+  const initialHash = (window as Window & { __initialHash?: string }).__initialHash ?? '';
+  if (initialHash) {
+    const target = document.getElementById(initialHash.slice(1));
+    if (target) {
+      setTimeout(() => {
+        const offset = (header?.offsetHeight ?? 80) + 20;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      }, 80);
+    }
+  }
+</script>
+
+<style>
+  /* ── Slide-in on page load ── */
+  @keyframes headerIn {
+    from { transform: translateY(-110%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+
+  .header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: headerIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+      background   0.25s ease,
+      border-color 0.25s ease,
+      backdrop-filter         0.25s ease,
+      -webkit-backdrop-filter 0.25s ease,
+      box-shadow   0.25s ease;
+  }
+
+  /* Top-of-page soft vignette, hides when scrolled */
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(9, 9, 9, 0.52) 0%,
+      rgba(9, 9, 9, 0.16) 55%,
+      transparent 100%
+    );
+    transition: opacity 0.32s ease;
+  }
+
+  /* Accent hairline – appears on scroll, static gradient */
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.06) 25%,
+      rgba(255, 255, 255, 0.06) 75%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  /* ── State 2: leichter Scroll ── */
+  .header.is-scrolled {
+    background: rgba(0, 0, 0, 0.55);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .header.is-scrolled::before { opacity: 0; }
+  .header.is-scrolled::after  { opacity: 1; }
+
+  /* ── State 3: tiefer Scroll ── */
+  .header.is-solid {
+    background: rgba(0, 0, 0, 0.85);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 4px 28px rgba(0, 0, 0, 0.28);
+  }
+
+  .header.is-solid::before { opacity: 0; }
+  .header.is-solid::after  { opacity: 1; }
+
+  /* Menu-open state */
+  .header.menu-open {
+    background: rgba(9, 9, 9, 0.90);
+    border-bottom-color: var(--color-border);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+  }
+
+  .header.menu-open::before { opacity: 0; }
+
+  /* ── Inner – full-width so logo is always left-anchored ── */
+  .header__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 14px clamp(20px, 4vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  /* ── Logo ── */
+  .header__logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .header__logo:hover { opacity: 0.75; }
+
+  .header__logo img {
+    height: 68px;
+    width: auto;
+    display: block;
+  }
+
+  /* ── Desktop nav ── */
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 2.5vw, 36px);
+  }
+
+  .header__nav a {
+    position: relative;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    transition: color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Accent underline – Deep Industrial Blue as interaction colour */
+  .header__nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 1px;
+    background: var(--color-accent-h);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .header__nav a:hover       { color: rgba(255, 255, 255, 0.96); }
+  .header__nav a.is-active   { color: #ffffff; }
+
+  .header__nav a:hover::after,
+  .header__nav a.is-active::after { transform: scaleX(1); }
+
+  /* ── Burger ── */
+  .header__toggle {
+    display: none;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .header__toggle span {
+    position: absolute;
+    left: 9px;
+    right: 9px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 0;
+    transition:
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      top       0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   0.18s ease;
+  }
+
+  .header__toggle span:first-child { top: 18px; }
+  .header__toggle span:last-child  { top: 25px; }
+
+  .header.menu-open .header__toggle span:first-child {
+    top: 22px; transform: rotate(45deg);
+  }
+  .header.menu-open .header__toggle span:last-child {
+    top: 22px; transform: rotate(-45deg);
+  }
+
+  /* ── Mobile nav ── */
+  .mobile-nav {
+    display: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .header__logo img { height: 48px; }
+  }
+
+  @media (max-width: 640px) {
+    .header {
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    .header.is-scrolled {
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    .header.is-solid {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    .header__inner {
+      padding: 10px 20px;
+    }
+
+    .header__logo img { height: 44px; }
+    .header__nav      { display: none; }
+    .header__toggle   { display: block; }
+
+    .mobile-nav {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      overscroll-behavior: contain;
+      border-top: 1px solid transparent;
+      transition:
+        max-height   0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.22s ease;
+    }
+
+    .header.menu-open .mobile-nav {
+      max-height: 220px;
+      border-top-color: var(--color-border);
+    }
+
+    .mobile-nav__inner {
+      display: flex;
+      flex-direction: column;
+      padding: 4px 20px 16px;
+    }
+
+    .mobile-nav a {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.80rem;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mobile-nav a:last-child   { border-bottom: none; }
+    .mobile-nav a:hover,
+    .mobile-nav a.is-active    { color: rgba(255, 255, 255, 0.96); }
+  }
+</style>

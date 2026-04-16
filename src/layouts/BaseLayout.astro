@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?:       string;
+  description?: string;
+  ogImage?:     string;
+  canonical?:   string;
+  noindex?:     boolean;
+}
+
+const {
+  title       = "EBABUTZKY – Betrieb von Energieinfrastruktur",
+  description = "Wartung, Störungsanalyse und Betriebssicherheit für Energieanlagen, Schaltanlagen und Trafostationen. Für Anlagen, die laufen müssen.",
+  ogImage     = "/hero-bg.jpg",
+  canonical   = Astro.url.href,
+  noindex     = false,
+} = Astro.props;
+
+const ogImageAbsolute = new URL(ogImage, Astro.url).href;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090909" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={ogImageAbsolute} />
+    <meta property="og:locale"      content="de_DE" />
+    <meta property="og:site_name"   content="EBABUTZKY" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImageAbsolute} />
+
+    <!-- Favicon – Dateien: /favicon.svg, /favicon.ico, /apple-touch-icon.png -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body>
+    <!-- Save hash before stripping it – Header script picks it up for smooth scroll -->
+    <script is:inline>
+      if (location.hash) {
+        window.__initialHash = location.hash;
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    </script>
+
+    <slot />
+
+    <!-- Global reveal observer – handles every .reveal on the page -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header    from '../components/layout/Header.astro';
+import Footer    from '../components/layout/Footer.astro';
+---
+
+<BaseLayout
+  title="Impressum – EBABUTZKY"
+  description="Impressum und Anbieterkennzeichnung gemäß § 5 TMG für EBABUTZKY."
+  noindex={true}
+>
+  <Header />
+
+  <main class="legal-page">
+    <div class="section-inner legal-inner">
+
+      <h1>Impressum</h1>
+
+      <section class="legal-block">
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+          EBabutzky GmbH<br />
+          Schulstr. 39<br />
+          73252 Lenningen<br />
+          Deutschland
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>Vertreten durch</h2>
+        <p>Evemarie Babutzky</p>
+      </section>
+
+      <section class="legal-block">
+        <h2>Kontakt</h2>
+        <p>
+          Telefon: <a href="tel:+4970264241">+49 7026 4241</a><br />
+          Mobil: <a href="tel:+491623744444">+49 162 374 44 44</a><br />
+          E-Mail: <a href="mailto:anfrage@ebabutzky.com">anfrage@ebabutzky.com</a>
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>Handelsregister</h2>
+        <p>
+          Registergericht: Amtsgericht Stuttgart<br />
+          Registernummer: HRB 769710
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+          Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
+          DE 324828493
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>Aufsichtsbehörde</h2>
+        <p>
+          Handwerkskammer Region Stuttgart<br />
+          Heilbronner Straße 43<br />
+          70191 Stuttgart<br />
+          Deutschland<br /><br />
+          <a href="https://www.hwk-stuttgart.de" target="_blank" rel="noopener noreferrer">
+            www.hwk-stuttgart.de
+          </a>
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>Berufsbezeichnung und berufsrechtliche Regelungen</h2>
+        <p>
+          Berufsbezeichnung: Elektrotechnikermeister<br />
+          Verliehen in: Deutschland<br /><br />
+          Es gelten folgende berufsrechtliche Regelungen:<br />
+          Handwerksordnung (HwO)<br />
+          <a href="https://www.gesetze-im-internet.de/hwo/" target="_blank" rel="noopener noreferrer">
+            www.gesetze-im-internet.de/hwo/
+          </a>
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>Verbraucherstreitbeilegung</h2>
+        <p>
+          Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    background: var(--color-bg);
+    min-height: 100vh;
+    padding-top: calc(var(--header-offset) + 40px);
+    padding-bottom: var(--section-y);
+  }
+
+  .legal-inner {
+    max-width: 720px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    color: var(--color-text);
+    margin: 0 0 56px;
+  }
+
+  .legal-block {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-block:last-child {
+    border-bottom: none;
+  }
+
+  h2 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+    margin: 0 0 16px;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.20);
+    text-underline-offset: 3px;
+    transition: color 0.18s ease;
+  }
+
+  a:hover {
+    color: rgba(255, 255, 255, 0.92);
+  }
+</style>

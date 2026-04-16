@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header    from '../components/layout/Header.astro';
+import Footer    from '../components/layout/Footer.astro';
+---
+
+<BaseLayout
+  title="Seite nicht gefunden – EBABUTZKY"
+  description="Die aufgerufene Seite existiert nicht."
+  noindex={true}
+>
+  <Header />
+
+  <main class="not-found">
+    <div class="section-inner not-found__inner">
+      <span class="not-found__code">404</span>
+      <h1>Seite nicht gefunden.</h1>
+      <p>Die aufgerufene Adresse existiert nicht oder wurde verschoben.</p>
+      <a href="/" class="not-found__back">Zurück zur Startseite →</a>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .not-found {
+    background: var(--color-bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: var(--header-offset);
+    padding-bottom: var(--section-y);
+  }
+
+  .not-found__code {
+    display: block;
+    font-size: clamp(5rem, 14vw, 10rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.06);
+    margin-bottom: 24px;
+    user-select: none;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    color: var(--color-text);
+    margin: 0 0 16px;
+  }
+
+  p {
+    margin: 0 0 40px;
+    color: rgba(255, 255, 255, 0.52);
+    font-size: 1rem;
+    line-height: 1.68;
+  }
+
+  .not-found__back {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 28px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    transition:
+      background  0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      color       0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      transform   0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .not-found__back:hover {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .not-found__back:active {
+    transform: translateY(0);
+    transition-duration: 0.08s;
+  }
+</style>

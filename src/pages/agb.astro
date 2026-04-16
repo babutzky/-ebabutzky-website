@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header    from '../components/layout/Header.astro';
+import Footer    from '../components/layout/Footer.astro';
+---
+
+<BaseLayout
+  title="AGB – EBABUTZKY"
+  description="Allgemeine Geschäftsbedingungen von EBABUTZKY."
+  noindex={true}
+>
+  <Header />
+
+  <main class="legal-page">
+    <div class="section-inner legal-inner">
+
+      <h1>Allgemeine Geschäfts&shy;bedingungen</h1>
+
+      <section class="legal-block">
+        <h2>§ 1 Geltungsbereich</h2>
+        <p>
+          Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen
+          EBabutzky GmbH (nachfolgend „Auftragnehmer") und dem jeweiligen Auftraggeber
+          über die Erbringung von Leistungen im Bereich Elektrotechnik, Wartung,
+          Instandhaltung und Betrieb von Energie- und Industrieanlagen.<br /><br />
+          Abweichende Bedingungen des Auftraggebers werden nicht anerkannt,
+          es sei denn, der Auftragnehmer stimmt ihrer Geltung ausdrücklich schriftlich zu.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 2 Vertragsschluss</h2>
+        <p>
+          Angebote des Auftragnehmers sind freibleibend und unverbindlich.
+          Ein Vertrag kommt erst durch schriftliche Auftragsbestätigung oder durch
+          Beginn der Leistungserbringung zustande.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 3 Leistungsumfang</h2>
+        <p>
+          Der Umfang der zu erbringenden Leistungen ergibt sich aus dem jeweiligen
+          Angebot bzw. der Auftragsbestätigung. Änderungen oder Erweiterungen des
+          Leistungsumfangs bedürfen der schriftlichen Vereinbarung.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 4 Mitwirkungspflichten des Auftraggebers</h2>
+        <p>
+          Der Auftraggeber stellt alle für die Leistungserbringung erforderlichen
+          Informationen, Unterlagen und Zugänge rechtzeitig zur Verfügung.
+          Verzögerungen durch unzureichende Mitwirkung gehen nicht zu Lasten
+          des Auftragnehmers.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 5 Vergütung und Zahlung</h2>
+        <p>
+          Die Vergütung richtet sich nach dem jeweils vereinbarten Angebot.
+          Rechnungen sind innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug
+          zahlbar, sofern nicht abweichend vereinbart.<br /><br />
+          Bei Zahlungsverzug werden Verzugszinsen in gesetzlicher Höhe berechnet.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 6 Gewährleistung</h2>
+        <p>
+          Der Auftragnehmer leistet Gewähr für die ordnungsgemäße Ausführung der
+          vereinbarten Leistungen. Die Gewährleistungsfrist beträgt 12 Monate
+          ab Abnahme, sofern nicht gesetzlich oder vertraglich abweichend geregelt.<br /><br />
+          Offensichtliche Mängel sind unverzüglich, spätestens innerhalb von
+          5 Werktagen nach Leistungserbringung schriftlich anzuzeigen.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 7 Haftung</h2>
+        <p>
+          Der Auftragnehmer haftet für Schäden aus der Verletzung des Lebens,
+          des Körpers oder der Gesundheit unbeschränkt. Für sonstige Schäden
+          haftet der Auftragnehmer nur bei Vorsatz oder grober Fahrlässigkeit.<br /><br />
+          Die Haftung für mittelbare Schäden, Folgeschäden und entgangenen Gewinn
+          ist – soweit gesetzlich zulässig – ausgeschlossen.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 8 Vertraulichkeit</h2>
+        <p>
+          Beide Parteien verpflichten sich, alle im Rahmen der Zusammenarbeit
+          erlangten vertraulichen Informationen vertraulich zu behandeln und
+          nicht an Dritte weiterzugeben. Diese Pflicht besteht über das Ende
+          des Vertragsverhältnisses hinaus.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 9 Anwendbares Recht und Gerichtsstand</h2>
+        <p>
+          Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss
+          des UN-Kaufrechts.<br /><br />
+          Gerichtsstand für alle Streitigkeiten aus oder im Zusammenhang mit
+          diesem Vertrag ist – soweit gesetzlich zulässig – der Sitz des
+          Auftragnehmers.
+        </p>
+      </section>
+
+      <section class="legal-block">
+        <h2>§ 10 Salvatorische Klausel</h2>
+        <p>
+          Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden,
+          bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
+          Die unwirksame Bestimmung ist durch eine wirksame zu ersetzen,
+          die dem wirtschaftlichen Zweck am nächsten kommt.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    background: var(--color-bg);
+    min-height: 100vh;
+    padding-top: calc(var(--header-offset) + 40px);
+    padding-bottom: var(--section-y);
+  }
+
+  .legal-inner {
+    max-width: 720px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    color: var(--color-text);
+    margin: 0 0 56px;
+  }
+
+  .legal-block {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-block:last-child {
+    border-bottom: none;
+  }
+
+  h2 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+    margin: 0 0 16px;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.20);
+    text-underline-offset: 3px;
+    transition: color 0.18s ease;
+  }
+
+  a:hover {
+    color: rgba(255, 255, 255, 0.92);
+  }
+</style>
