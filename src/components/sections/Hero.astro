@@ -226,6 +226,7 @@
     window.addEventListener(
       'scroll',
       () => {
+        if (window.innerWidth <= 640) return;
         if (!ticking) {
           window.requestAnimationFrame(() => {
             const offset = window.scrollY * 0.05;
